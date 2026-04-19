@@ -14,12 +14,13 @@ const PORT = process.env.PORT
 
 const app = express()
 app.use(cookieParser())
-app.use(express.json())
-app.post('/api/stripe/webhook',express.raw({type:'application/json'}),stripeWebhook)
 app.use(cors({
     origin: "http://localhost:5173",
     credentials:true
 }))
+app.post('/api/stripe/webhook',express.raw({type:'application/json'}),stripeWebhook)
+app.use(express.json())
+
 
 //route setup
 app.use("/api/auth",authRouter)
