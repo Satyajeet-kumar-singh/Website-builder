@@ -27,7 +27,7 @@ export const billing=async(req,res,next)=>{
                 }
             ],
             metadata:{
-                userID:userId.toString(),
+                userId:userId.toString(),
                 credits:plan.credits,
                 plan:plan.plan
             },
