@@ -1,11 +1,12 @@
 import { handleError } from "../helper/handleError.js"
 import User from "../model/user.model.js"
+import stripe from "../config/stripe.js"
 
 export const stripeWebhook=async(req,res,next)=>{
-    const sig = req.headers.get('stripe-signature')
+    const sig = req.headers['stripe-signature']
     let event;
     try {
-        event = stripe.webhooks.constructEvent(req.body,sig,process.env.STRIPE_WEBHOOK-SECRET)
+        event = stripe.webhooks.constructEvent(req.body,sig,process.env.STRIPE_WEBHOOK_SECRET)
     } catch (error) {
         console.log(error)
         return next(handleError(500,`webhook error`))
